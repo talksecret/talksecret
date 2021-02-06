@@ -88,6 +88,13 @@
 		<label for="TextFinal">Encrypted/Decrypted text</label>
 		<textarea class="form-control" id="TextFinal" rows=4 placeholder="Waiting..."></textarea>
 	</div>
+	<div class="container">
+		<div class="row">
+			<button onclick="copyFunction()" type="button" class="btn btn-light col">Copy</button>
+			<button onclick="pasteFunction()" type="button" class="btn btn-light col">Paste</button>
+		</div>
+	</div>
+
 </form>
 </section>
 
@@ -125,26 +132,26 @@
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-function updateFinal(){
-	var x = document.getElementById("TextToEncryptDecrypt").value;
-	var y = document.getElementById("Key").value;
-	var z = document.getElementById("option").value;
-	if(z.valueOf()=="Encrypt"){var f = CryptoJS.AES.encrypt(x, y).toString();}
-	if(z.valueOf()=="Decrypt"){var f = CryptoJS.AES.decrypt(x, y).toString(CryptoJS.enc.Utf8);}
-	document.getElementById("TextFinal").value = f;}
+	function updateFinal(){
+		var x = document.getElementById("TextToEncryptDecrypt").value;
+		var y = document.getElementById("Key").value;
+		var z = document.getElementById("option").value;
+		if(z.valueOf()=="Encrypt"){var f = CryptoJS.AES.encrypt(x, y).toString();}
+		if(z.valueOf()=="Decrypt"){var f = CryptoJS.AES.decrypt(x, y).toString(CryptoJS.enc.Utf8);}
+		document.getElementById("TextFinal").value = f;}
 </script>
-<!--
-style="height: 110px; overflow-y: hidden;"	
 <script type="text/javascript">
-	const b = document.getElementsByTagName("textarea");
-	for (let i = 0; i < b.length; i++) {
-		b[i].setAttribute('style', 'height:' + (b[i].scrollHeight) + 'px;overflow-y:hidden;');
-		b[i].addEventListener("input", OnInput, false);
+	function copyFunction(){
+		var copyText = document.getElementById("myInput");
+		copyText.select();
+		copyText.setSelectionRange(0, 99999)
+		document.execCommand("copy");
+		alert("Copied the text: " + copyText.value);
+		}
+	function pasteFunction(){
+		var textToPaste = document.execCommand("paste");
+		document.getElementById("TextToEncryptDecrypt").value = textToPaste;
 	}
-	function OnInput() {
-		this.style.height = 'auto';
-		this.style.height = (this.scrollHeight) + 'px';
-	}
-</script>-->
+</script>
 </body>
 </html>
