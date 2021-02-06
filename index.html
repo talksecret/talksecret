@@ -141,23 +141,11 @@
 		document.getElementById("TextFinal").value = f;}
 </script>
 <script type="text/javascript">
-	const output = document.getElementById("TextFinal");
-	const copyBtn = document.getElementById("copyButton");
-	const pasteBtn = document.getElementById("pasteButton")
-	
-	copyBtn.onclick = function () {
-		output.select();
-		output.setSelectionRange(0, 99999);
-		document.execCommand("copy");
-	}
-
-	pasteBtn.onclick = function () {
-		let input = document.getElementById("TextToEncryptDecrypt");
-		input.value = '';
-
-		navigator.clipboard.readText().then((text)=>{input.value = text});
-	}
-
+	const output = document.getElementById("TextFinal");const copyBtn = document.getElementById("copyButton");
+	const pasteBtn = document.getElementById("pasteButton");copyBtn.onclick = function () {
+	output.select();output.setSelectionRange(0, 99999);document.execCommand("copy");}
+	pasteBtn.onclick = function () {let input = document.getElementById("TextToEncryptDecrypt");
+	input.value = '';navigator.clipboard.readText().then((text)=>{input.value = text});}
 </script>
 </body>
 </html>
