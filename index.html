@@ -90,8 +90,8 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<button onclick="copyFunction()" type="button" class="btn btn-light col">Copy</button>
-			<button onclick="pasteFunction()" type="button" class="btn btn-light col">Paste</button>
+			<button id="copyButton" type="button" class="btn btn-light col">Copy</button>
+			<button id="pasteButton" type="button" class="btn btn-light col">Paste</button>
 		</div>
 	</div>
 
@@ -141,17 +141,23 @@
 		document.getElementById("TextFinal").value = f;}
 </script>
 <script type="text/javascript">
-	function copyFunction(){
-		var copyText = document.getElementById("myInput");
-		copyText.select();
-		copyText.setSelectionRange(0, 99999)
+	const output = document.getElementById("TextFinal");
+	const copyBtn = document.getElementById("copyButton");
+	const pasteBtn = document.getElementById("pasteButton")
+	
+	copyBtn.onclick = function () {
+		output.select();
+		output.setSelectionRange(0, 99999);
 		document.execCommand("copy");
-		alert("Copied the text: " + copyText.value);
-		}
-	function pasteFunction(){
-		var textToPaste = document.execCommand("paste");
-		document.getElementById("TextToEncryptDecrypt").value = textToPaste;
 	}
+
+	pasteBtn.onclick = function () {
+		let input = document.getElementById("TextToEncryptDecrypt");
+		input.value = '';
+
+		navigator.clipboard.readText().then((text)=>{input.value = text});
+	}
+
 </script>
 </body>
 </html>
